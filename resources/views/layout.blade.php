@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
 
   <link rel="stylesheet" href="../assets/css/theme.css">
+
 </head>
 <body>
 
@@ -73,8 +74,8 @@
                 <li class="{{Request::is('doctors') ? 'nav-item active':'nav-item'}}">
                   <a class="nav-link" href="/doctors">Doctors</a>
                 </li>
-                <li class="{{Request::is('blog') ? 'nav-item active':'nav-item '}}">
-                  <a class="nav-link" href="/blog">News</a>
+                <li class="{{Request::is('articles') ? 'nav-item active':'nav-item '}}">
+                  <a class="nav-link" href="/articles">Articles</a>
                 </li>
                 <li class="{{Request::is('contact') ? 'nav-item active':'nav-item'}}">
                   <a class="nav-link" href="contact">Contact</a>

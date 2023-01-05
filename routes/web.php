@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PostsController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,12 +56,17 @@ Route::get('/contact', function () {
 });
 
 Route::get('/about', function () {
+
     return view('about');
 });
 
-Route::get('/blog', function () {
-    return view('blog');
-});
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/create', [ArticleController::class, 'create']);
+Route::get('/articles/{article}', [ArticleController::class, 'show']);
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::put('/articles/{article}', [ArticleController::class, 'update']);
+Route::delete('/articles/{article}/delete', [ArticleController::class, 'delete']);
 
 Route::get('/doctors', function () {
     return view('doctors');
