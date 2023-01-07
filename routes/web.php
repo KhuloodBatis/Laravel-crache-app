@@ -60,7 +60,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/articles/create', [ArticleController::class, 'create']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);

@@ -31,7 +31,12 @@
                 <h3> Update Article</h3>
                      <div class="col-12 py-2 wow fadeInUp">
                         <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Title .." value="{{old('title')}}">
+                        <input
+                        type="text"
+                        name="title"
+                        class="form-control"
+                        placeholder="Title .."
+                        value="{{old('title')}}">
                         @if($errors->has('title'))
                         <div class="error text-danger">{{ $errors->first('title') }}</div>
                     @endif
@@ -39,7 +44,11 @@
 
             <div class="col-12 py-2 wow fadeInUp">
                 <label for="excerpt">Excerpt</label>
-                <input type="text" name="excerpt" class="form-control" placeholder="Enter excerpt.." value="{{old('excerpt')}}">
+                <input type="text"
+                name="excerpt"
+                class="form-control"
+                placeholder="Enter excerpt.."
+                value="{{old('excerpt')}}">
 
                 @if($errors->has('excerpt'))
                 <div class="error text-danger">{{ $errors->first('excerpt') }}</div>
@@ -48,7 +57,13 @@
 
             <div class="col-12 py-2 wow fadeInUp">
                 <label for="body">Body</label>
-                <textarea name="body" class="form-control" rows="8" placeholder="Enter body." value="{{old('body')}}"></textarea>
+                <textarea
+                name="body"
+                class="form-control"
+                rows="8"
+                placeholder="Enter body."
+                value="{{old('body')}}"
+                ></textarea>
                 @if($errors->has('body'))
                 <div class="error text-danger">{{ $errors->first('body') }}</div>
             @endif

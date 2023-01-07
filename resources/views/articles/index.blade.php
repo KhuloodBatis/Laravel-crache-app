@@ -26,7 +26,7 @@
      <div class="row">
        <div class="col-lg-8">
          <div class="row">
-            @foreach ( $articles as $article )
+            @forelse ( $articles as $article )
             <div class="col-sm-6 py-3">
                 <div class="card-blog">
                   <div class="header">
@@ -45,15 +45,21 @@
                         <div class="avatar-img">
                           <img src="../assets/img/person/person_1.jpg" alt="">
                         </div>
-                        <span>Roger Adams</span>
+                        <span>{{$article->author->name}}</span>
                       </div>
                       <span class="mai-time">{{$article->created_at = now()}}</span>
+                      <p>
+                        @foreach ( $article->tags as $tag)
+                           <a href="{{route('articles.index',['tag'=>$tag->name])}}">{{$tag->name}}</a>
+                        @endforeach
+                    </p>
                     </div>
                   </div>
                 </div>
               </div>
-
-            @endforeach
+             @empty
+             <p>No relevant articles yet.</p>
+            @endforelse
 
 
            <div class="col-12 my-5">

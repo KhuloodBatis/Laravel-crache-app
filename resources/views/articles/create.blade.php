@@ -38,11 +38,33 @@
             <div class="col-12 py-2 wow fadeInUp">
                 <label for="excerpt">Excerpt</label>
                 <input type="text" name="excerpt" class="form-control" placeholder="Enter excerpt..">
+                @if($errors->has('excerpt'))
+                <div class="error text-red-500">{{ $errors->first('excerpt') }}</div>
+            @endif
             </div>
 
             <div class="col-12 py-2 wow fadeInUp">
                 <label for="body">Body</label>
                 <textarea name="body" class="form-control" rows="8" placeholder="Enter body."></textarea>
+                @if($errors->has('body'))
+                <div class="error text-red-500">{{ $errors->first('body') }}</div>
+            @endif
+            </div>
+
+            <div class="col-12 py-2 wow fadeInUp">
+                <label for="tag">Tags</label>
+                <select
+                name="tags[]"
+                multiple
+                class="form-control">
+                @foreach ($tags as $tag )
+
+                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+            </select>
+                @if($errors->has('tag'))
+                <div class="error text-red-500">{{ $errors->first('tag') }}</div>
+            @endif
             </div>
 
             </div>

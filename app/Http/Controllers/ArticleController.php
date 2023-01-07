@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -14,8 +16,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        if (request('tag')) {
+            $articles = Tag::where('name', request('tag'))->firstOrFail()->articles;
+        } else {
+            $articles = Article::take(4)->latest()->get();
+        }
+
         return view('articles.index', [
-            'articles' => Article::take(4)->latest()->get(),
+            'articles' => $articles,
         ]);
     }
 
@@ -26,7 +34,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create', [
+            'tags' => Tag::all()
+        ]);
     }
 
     /**
@@ -40,14 +50,18 @@ class ArticleController extends Controller
         request()->validate([
             'title' => ['required',],
             'excerpt' => ['required',],
-            'body' => ['required']
+            'body' => ['required'],
+            'tags' => ['exists:tags,id']
         ]);
-        $article = new Article();
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
+        $article = Article::create([
+            'title' => request('title'),
+            'excerpt' => request('excerpt'),
+            'body' => request('body'),
+            'user_id' => 1
+        ]);
+        // $article->user_id = 1; //auth()->id();
+        $article->tags()->attach(request('tags'));//[1,2,3]
 
-        $article->save();
         return redirect('/articles')->with('article', $article);
     }
 
@@ -59,8 +73,6 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        // $article = Article::findOrFail($articleId);
-
         return view('articles.show', ['article' => $article]);
     }
 
@@ -72,7 +84,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        // $article = Article::find($articleId);
+
         return view('articles.edit', compact('article'));
     }
 
@@ -90,14 +102,14 @@ class ArticleController extends Controller
             'excerpt' => ['required',],
             'body' => ['required']
         ]);
-        // $article = Article::find($articleId);
 
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
+        $article->update([
+            'title' => request('title'),
+            'excerpt' => request('excerpt'),
+            'body' => request('body'),
+        ]);
 
-        $article->save();
-        return redirect('/articles/' . $article->id);
+        return redirect($article->path());
     }
 
     /**

@@ -32,6 +32,7 @@
               <h4 class="sidebar-title">{{$article->excerpt}}</h4>
             <p>{{$article->body}}</p>
         </div>
+
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="/articles/{{$article->id}}/edit">
                 <button type="button" class="btn btn-outline-secondary btn-sm" +>Edit Article</button>
