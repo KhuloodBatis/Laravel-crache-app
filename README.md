@@ -11,3 +11,4 @@
 
 simple hospital website to show the information about hospitale and shoe the news and contact with the hospital  
 
+![image](https://user-images.githubusercontent.com/50932099/211146783-d2d1c1fd-3c4a-43f0-92c4-d5f44421ce90.png)
